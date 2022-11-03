@@ -58,7 +58,7 @@ fs.readFile(filename, 'utf8', (err, data) => {
       (ele) => ele.name === prodName.toLowerCase()
     )[0];
     let itemCost = prodObj.price * quantity;
-    if (itemCost >= 1000 || amt >= 1000) {
+    if (itemCost + amt >= 1000 || amt >= 1000) {
       discount = (prodObj.discount / 100) * itemCost;
       finalDisc = finalDisc + discount;
       itemCost = itemCost - discount;
@@ -98,8 +98,8 @@ fs.readFile(filename, 'utf8', (err, data) => {
       // If input is PRINT BILL
       else if (eachLine.length === 1) {
         if (amt >= 3000) {
-          amt = amt - 0.05 * amt;
           finalDisc = finalDisc + 0.05 * amt;
+          amt = amt - 0.05 * amt;
         }
         amt = amt + 0.1 * amt;
         console.log('TOTAL_DISCOUNT', finalDisc.toFixed(2));
